@@ -59,6 +59,13 @@ const PostDetails=()=>{
                     <Box>
                       <Heading size="sm">Posted by</Heading>
                       <Text color="blue.400">@{username}</Text>
+                      <Text fontSize="sm">
+                    {new Date(selectedPost?.createdAt).toLocaleDateString('en-US', {
+                      day: 'numeric',
+                      month: 'short',
+                      year: 'numeric',
+                    })}
+                  </Text>
                     </Box>
                   </Flex>{' '}
                 </Flex>
