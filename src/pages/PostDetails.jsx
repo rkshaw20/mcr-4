@@ -26,7 +26,7 @@ const PostDetails=()=>{
     
       const {handleUpvote,handleDownvote,handleBookmark,data}=useDataContext()
 
-      const selectedPost=data.posts.find(({postId}) => postId=== +postDeId)
+      const selectedPost=data.posts.find(({postId}) => postId === +postDeId)
       console.log(selectedPost)
       const {
         postId,
