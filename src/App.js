@@ -11,20 +11,32 @@ import {
 } from '@chakra-ui/react';
 import { ColorModeSwitcher } from './ColorModeSwitcher';
 import { Logo } from './Logo';
-import { Route, Routes } from 'react-router-dom';
+import {  RouterProvider,  createBrowserRouter } from 'react-router-dom';
 import Home from './pages/Home';
+import RootLayout from './pages/components/RootLayout';
+import DataContextProvider from './pages/context';
+import PostDetails from './pages/PostDetails';
+
+const router = createBrowserRouter([
+
+  {
+    path: '/',
+    element: <RootLayout />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: '/post:postDeId', element: <PostDetails /> },
+    ],
+  },
+]);
+
 
 function App() {
   return (
     <ChakraProvider theme={theme}>
-        <Grid h='full' w='full' minH="100dvh" >
-          {/* <ColorModeSwitcher justifySelf="flex-end" /> */}
-           <Routes>
-            <Route path='/' element={<Home/>} />
-           </Routes>
-        </Grid>
+      <RouterProvider router={router}/>
     </ChakraProvider>
   );
 }
+
 
 export default App;

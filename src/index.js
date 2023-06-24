@@ -5,16 +5,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
+import DataContextProvider from './pages/context';
 
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 
 root.render(
   <StrictMode>
-    <BrowserRouter>
-    <ColorModeScript />
-    <App />
-    </BrowserRouter>
+      <ColorModeScript />
+      <DataContextProvider>
+        <App />
+      </DataContextProvider>
   </StrictMode>
 );
 
