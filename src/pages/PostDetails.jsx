@@ -17,16 +17,15 @@ import {
   import { BiShareAlt, BiComment } from 'react-icons/bi';
   import { TiArrowUpThick ,TiArrowDownThick} from "react-icons/ti";
 import { useDataContext } from "./context";
+import { AiOutlineHeart } from 'react-icons/ai';
+
 
 const PostDetails=()=>{
     const {postDeId}=useParams();
-
-
-    console.log({postDeId})
     
       const {handleUpvote,handleDownvote,handleBookmark,data}=useDataContext()
 
-      const selectedPost=data.posts.find(({postId}) => postId === +postDeId)
+      const selectedPost=data.posts.find(({postId}) => postId === postDeId);
       console.log(selectedPost)
       const {
         postId,
@@ -50,6 +49,7 @@ const PostDetails=()=>{
               <Text color='blue.400' >{upvotes - downvotes}</Text>
               <IconButton onClick={()=>handleDownvote(postId)} icon={<TiArrowDownThick />} />
             </Flex>
+            <Flex flexDir='column'>
             <Flex flexDir="column">
               <CardHeader>
                 <Flex spacing="4">
@@ -82,6 +82,55 @@ const PostDetails=()=>{
                   <IconButton
                     p="1rem"
                     variant="ghost"
+                    icon={<AiOutlineHeart />}
+                  ></IconButton>
+                  <IconButton
+                    p="1rem"
+                    variant="ghost"
+                    icon={<BiShareAlt />}
+                  ></IconButton>{' '}
+                </Flex>
+    
+                <IconButton
+                  p="1rem"
+                  variant="ghost"
+                  onClick={()=>handleBookmark(postId)}
+                  color={isBookmarked ? 'blue.400':''}
+                  icon={<BsBookmark />}
+                ></IconButton>
+              </CardFooter>
+            </Flex>
+            <Flex flexDir='column'>
+            <CardHeader>
+                <Flex spacing="4">
+                  <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
+                    <Avatar  src={picUrl} />
+    
+                    <Box>
+                      <Heading size="sm">Posted by</Heading>
+                      <Text color="blue.400">@{comments.username}</Text>
+                      <Text fontSize="sm">
+                    {new Date(comments?.createdAt).toLocaleDateString('en-US', {
+                      day: 'numeric',
+                      month: 'short',
+                      year: 'numeric',
+                    })}
+                  </Text>
+                    </Box>
+                  </Flex>{' '}
+                </Flex>
+              </CardHeader>
+              <CardBody mt="-6">
+                
+                <Text>{comments.comment}</Text>
+              </CardBody>
+    
+              <CardFooter justify="space-between" flexWrap="wrap">
+                <Flex>
+                  {' '}
+                  <IconButton
+                    p="1rem"
+                    variant="ghost"
                     icon={<BiComment />}
                   ></IconButton>
                   <IconButton
@@ -100,6 +149,8 @@ const PostDetails=()=>{
                 ></IconButton>
               </CardFooter>
             </Flex>
+            </Flex>
+           
           </Flex>
         </Card>
       );

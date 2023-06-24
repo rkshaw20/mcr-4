@@ -3,8 +3,10 @@ import { AiFillHome } from 'react-icons/ai';
 import { MdExplore } from 'react-icons/md';
 import { BsFillBookmarkFill } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
+import { useDataContext } from "../context";
 
 export const NavBar = () => {
+  const {data}=useDataContext();
     // const { onOpen, isOpen, onClose } = useDisclosure();
     const bgColor = useColorModeValue('gray.300', 'gray.600');
     const flexDirection = useBreakpointValue({ base: 'row', lg: 'column' });
@@ -89,11 +91,11 @@ export const NavBar = () => {
                 >
                   <Avatar
                     size={{ base: 'md', lg: 'md' }}
-                    src="https://res.cloudinary.com/dn5zs5sqx/image/upload/v1687185484/FhNGqSr__400x400_fnkcno.jpg"
+                    src={data.picUrl}
                   />
                   <Box ml="3">
-                    <Text fontWeight="bold">Raj</Text>
-                    <Text fontSize="sm">@RajKishorShaw17</Text>
+                    <Text fontWeight="bold">{data.name}</Text>
+                    <Text fontSize="sm">@{data.username}</Text>
                   </Box>
                 </Flex>
               
